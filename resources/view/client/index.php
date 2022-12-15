@@ -2,6 +2,9 @@
 $body = [
     'title' => 'Trang chủ'
 ];
+$sql = "SELECT *
+        FROM nhacnho nn JOIN ghichu gc ON nn.ghichu_id = gc.id";
+$getnn = $BB->getList($sql);
 require_once(__DIR__ . '/header.php');
 ?>
 <div class="content-wrapper">
@@ -100,19 +103,30 @@ require_once(__DIR__ . '/header.php');
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <div class="alert alert-danger alert-dismissible">
+                <!-- <div class="alert alert-danger alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                   <h5><i class="icon fas fa-ban"></i> Alert!</h5>
                   Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my
                   entire
                   soul, like these sweet mornings of spring which I enjoy with my whole heart.
-                </div>
-                <div class="alert alert-info alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                  <h5><i class="icon fas fa-info"></i> Alert!</h5>
-                  Info alert preview. This alert is dismissable.
-                </div>
-                <div class="alert alert-warning alert-dismissible">
+                </div> -->
+                <?php
+                  foreach ($getnn as $nn) {
+                    echo '
+                    <div class="alert alert-info alert-dismissible">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                      <h5><i class="icon fas fa-info"></i> Alert!</h5>
+                      <p>'.$nn['noidung'].'</p>
+                      <div class="row">
+                        <p>Đến hạn: <span id="denhan">'.$nn['end'].'</span></p>
+                        <p>Người thêm: <span id="denhan">Benbo</span></p>
+                      </div>
+                      
+                    </div>
+                    ';
+                  }
+                ?>
+                <!-- <div class="alert alert-warning alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                   <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
                   Warning alert preview. This alert is dismissable.
@@ -121,7 +135,7 @@ require_once(__DIR__ . '/header.php');
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                   <h5><i class="icon fas fa-check"></i> Alert!</h5>
                   Success alert preview. This alert is dismissable.
-                </div>
+                </div> -->
               </div>
               <!-- /.card-body -->
             </div>

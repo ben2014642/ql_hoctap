@@ -27,7 +27,14 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
             die(json_encode($data));
             break;
         case 'addAlert':
-            
+            $ghichu_id = $_POST['ghichu_id'];
+            $start = date('Y-m-d');
+            $end = $_POST['endDate'];
+            $sql = "INSERT INTO nhacnho VALUES(null,'$ghichu_id','$start','$end')";
+            $db->handleSQL($sql);
+            die(json_encode([
+                'status' => 'success'
+            ]));
             break;
         default:
             # code...

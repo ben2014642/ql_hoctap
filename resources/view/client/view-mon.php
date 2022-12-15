@@ -44,26 +44,7 @@ require_once(__DIR__ . '/header.php');
 
                             </div>
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                        </div> -->
-                        <!-- <div class="form-group">
-                            <label for="exampleInputFile">File input</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile">
-                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                </div>
-                                <div class="input-group-append">
-                                    <span class="input-group-text">Upload</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div> -->
+
                     </div>
                     <!-- /.card-body -->
 
@@ -104,6 +85,49 @@ require_once(__DIR__ . '/header.php');
     </div>
     <!-- /.modal-dialog -->
 </div>
+<div class="modal fade" id="modal-nhacnho">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Tạo nhắc nhở</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="create-nhacnho">
+                    <div class="card-body">
+                        <!-- <div class="form-group">
+                            <label for="noidung">Nội dung</label>
+                            <textarea class="form-control" name="noidung" id="noidung" rows="3"></textarea>
+                            <input type="text" value="<?= $idmon ?>" hidden name="idMon">
+                        </div> -->
+                        <!-- <label for="fileImgInput">File input</label> -->
+
+                        <div class="form-group">
+                            <label for="end-date">Ngày kết thúc</label>
+                            <input type="date" class="form-control" id="end-date">
+                        </div>
+
+
+                    </div>
+
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" onclick="addAlert()" class="btn btn-primary btn-add-nhacnho">Thêm</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -183,6 +207,7 @@ require_once(__DIR__ . '/header.php');
                                     $strImg .= '<img style="width: 108px" src="public/upload/img/' . $img['tenanh'] . '">';
                                 }
                                 echo '
+                                        <input id="ghichu_id" type="text" data-id="' . $item['id'] . '" hidden>
                                         <div class="time-label">
                                             <span class="bg-red">' . $item['created_at'] . '</span>
                                         </div>
@@ -202,7 +227,7 @@ require_once(__DIR__ . '/header.php');
                                                 
                                                     <a onclick="showNote(' . $item['id'] . ')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-showNote">Chi tiết</a>
                                                     <a class="btn btn-danger btn-sm" onclick="deleteNote(' . $item['id'] . ')">Xóa</a>
-                                                    <a class="btn btn-primary btn-sm" onclick="addAlert(${item.id})">Tạo nhắc nhở</a>
+                                                    <a data-toggle="modal" data-target="#modal-nhacnho" class="btn btn-primary btn-sm">Tạo nhắc nhở</a>
 
                                                 </div>
                                             </div>
@@ -413,18 +438,29 @@ require_once(__DIR__ . '/footer.php');
         return result;
     }
 
-    function addAlert(id) {
+    function addAlert() {
+        let ghichu_id = $("#ghichu_id").data('id');
+        let endDate = $("#end-date").val();
+        // console.log(endDate);
+        // return;
         $.ajax({
             type: "POST",
-            url: "url",
+            url: "<?= base_url('ajax/handleNote.php') ?>",
             data: {
                 action: "addAlert",
-                ghichu_id: id
+                ghichu_id: ghichu_id,
+                endDate: endDate
             },
             dataType: "json",
-            success: function (res) {
-                
+            success: function(res) {
+                if (res.status == 'success') {
+                    toastr.success('Tạo nhắc nhở thành công !', 'success')
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+                }
             }
         });
+
     }
 </script>
