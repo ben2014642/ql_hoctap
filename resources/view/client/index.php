@@ -3,7 +3,7 @@ $body = [
   'title' => 'Trang chủ'
 ];
 $sql = "SELECT *
-        FROM nhacnho nn JOIN ghichu gc ON nn.ghichu_id = gc.id";
+        FROM nhacnho nn JOIN ghichu gc ON nn.ghichu_id = gc.id ORDER BY id_nn DESC";
 $getnn = $BB->getList($sql);
 
 $date_time_current = new DateTime();
@@ -163,17 +163,24 @@ require_once(__DIR__ . '/header.php');
             <!-- /.card-header -->
             <div class="card-body">
               <?php
-                foreach ($lichhoc as $item) {
-                  echo '
-                  <div class="callout callout-danger">
+              $arrColor = ['callout callout-danger', 'callout callout-info', 'callout callout-warning', 'callout callout-success'];
+              $i = 0;
+              foreach ($lichhoc as $item) {
+                echo '
+                  <div class="' . $arrColor[$i] . '">
                     <div class="lichhoc" style="display:flex;">
-                      <h5>'.$item['tenmon'].'</h5>
+                      <h5>' . $item['tenmon'] . '</h5>
                       <span style="margin-left: 10px; color: blue">Ngày mai</span>
                     </div>
     
-                    <p>Phòng học: <span style="color: orange" class="phonghoc">'.$item['phonghoc'].'</span> Tiết bắt đầu: <span class="tiet_bd">'.$item['tiet_bd'].'</span></p>
+                    <p>Phòng học: <span style="color: orange" class="phonghoc">' . $item['phonghoc'] . '</span> Tiết bắt đầu: <span class="tiet_bd">' . $item['tiet_bd'] . '</span></p>
                   </div>';
+                $i++;
+                if ($i == 4) {
+                  $i = 0;
                 }
+              }
+
               ?>
 
               <!-- <div class="callout callout-info">

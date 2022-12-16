@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
 $getMon = $BB->getOneRow('monhoc', $idmon);
 $sql = "SELECT gc.*,ac.username,ac.id as userID  FROM ghichu gc JOIN account ac ON gc.userId = ac.id WHERE  mon_id = $idmon order by created_at DESC";
 $getGhiChu = $BB->getList($sql);
-
+// echo $idmon;die();
 require_once(__DIR__ . '/header.php');
 ?>
 <div class="modal fade" id="modal-default">
@@ -36,8 +36,8 @@ require_once(__DIR__ . '/header.php');
                                         <div class="file-select">
                                             <div class="file-select-button" id="fileName">Choose File</div>
                                             <div class="file-select-name" id="noFile">No file chosen...</div>
-                                            <input type="file" id="files" name="files[]" multiple>
-                                            <!-- <input type="file" id="file" name="file"> -->
+                                            <!-- <input type="file" id="files" name="files[]" multiple> -->
+                                            <input type="file" id="file" name="file">
                                         </div>
                                     </div>
                                 </div>
@@ -45,9 +45,14 @@ require_once(__DIR__ . '/header.php');
                             </div>
                         </div>
 
+
                     </div>
                     <!-- /.card-body -->
-
+                    <div class="">
+                        <div class="input-group wrap-preview-img">
+                            <img src="https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg" class="img-upload-preview img-fluid no-data-img" alt="">
+                        </div>
+                    </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
@@ -149,9 +154,9 @@ require_once(__DIR__ . '/header.php');
     <!-- Main content -->
     <section class="content connectedSortable ui-sortable">
         <div class="row mr-2 mb-2 fl-direction-end ">
-            <button type="button" class="ml-2 btn btn-primary btn-center" data-toggle="modal" data-target="#modal-default">
+            <!-- <button type="button" class="ml-2 btn btn-primary btn-center" data-toggle="modal" data-target="#modal-default">
                 <ion-icon name="add-circle-outline"></ion-icon>Thêm
-            </button>
+            </button> -->
             <a href="?action=gallery&id=<?= $idmon ?>">
                 <button type="button" class="ml-2 btn btn-warning btn-center">
                     <ion-icon name="images-outline"></ion-icon>Gallery
@@ -215,7 +220,7 @@ require_once(__DIR__ . '/header.php');
                                         <div>
                                             <i class="fas fa-comments bg-yellow"></i>
                                             <div class="timeline-item">
-                                                <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                                                <span class="time">' . $item['created_at'] . '</span>
                                                 <h3 class="timeline-header"><a href="#">' . $item['username'] . '</a> đã tạo ghi chú mới</h3>
                                                 <div class="timeline-body">
                                                     <p class="note-content">' . $item['noidung'] . '</p>
@@ -464,5 +469,11 @@ require_once(__DIR__ . '/footer.php');
             }
         });
 
+    }
+    window.onload = function() {
+        document.querySelectorAll(".time").forEach(item => {
+            var time = item.innerText;
+            item.innerText = moment(time).fromNow();
+        })
     }
 </script>

@@ -27,18 +27,28 @@ $dachsach_mon = $BB->getList($sql);
 
     <!-- Main content -->
     <section class="content">
+        <div class="row fl-direction-end mr-2">
+            <div class="mb-3 ml-2">
+                <a href="?action=lichhoc" class="btn btn-primary btn-icon-left m-b-10"><i class="fa-solid fa-list"></i>Danh Sách</a href="">
+            </div>
+            <div class="mb-3 ml-2">
+                <a class="btn btn-warning btn-icon-left m-b-10 btn-center " href="javascript:history.go(-1)" type="button">
+                    <ion-icon name="arrow-back-circle-outline"></ion-icon>Back
+                </a>
+            </div>
 
+        </div>
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Chọn Môn:
                     <select class="custom-select rounded-0" name="" id="chon-mon">
                         <?php
-                            foreach ($dachsach_mon as $mon) {
-                                echo '
-                                    <option value="'.$mon['tenmon'].'">'.$mon['tenmon'].'</option>
+                        foreach ($dachsach_mon as $mon) {
+                            echo '
+                                    <option value="' . $mon['tenmon'] . '">' . $mon['tenmon'] . '</option>
                                 ';
-                            }
+                        }
                         ?>
                     </select>
                 </h3>
@@ -109,11 +119,11 @@ require_once(__DIR__ . '/footer.php');
         let phonghoc = $(".phong-hoc").val();
         let tietbd = $(".tiet-bd").val();
         let sotiet = $(".so-tiet").val();
-        let user_id = <?=$user_id?>;
+        let user_id = <?= $user_id ?>;
         console.log(user_id);
         $.ajax({
             type: "POST",
-            url: "<?=base_url('ajax/handleNN.php')?>",
+            url: "<?= base_url('ajax/handleNN.php') ?>",
             data: {
                 action: 'addLH',
                 tenmon: tenmon,
@@ -125,7 +135,7 @@ require_once(__DIR__ . '/footer.php');
 
             },
             dataType: "json",
-            success: function (res) {
+            success: function(res) {
                 if (res.status == 'success') {
                     toastr.success("Tạo lịch học thành công !", 'success');
                     setTimeout(() => {

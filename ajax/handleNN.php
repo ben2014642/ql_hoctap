@@ -29,6 +29,15 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
                 'status' => 'success'
             ]));
             break;
+        case 'updateLH':
+
+            break;
+        case 'getLH':
+            $id_lh = $_POST['id_lh'];
+            $sql = "SELECT * FROM lichhoc WHERE id_lh = $id_lh";
+            $data = $db->getList($sql);
+            die(json_encode($data));
+            break;
         default:
             # code...
             break;

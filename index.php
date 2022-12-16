@@ -1,5 +1,7 @@
 <?php
 session_start();
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+
 $user_id = $_SESSION['account']['id'];
 require_once(__DIR__.'/libs/db.php');
 require_once(__DIR__.'/libs/helper.php');
