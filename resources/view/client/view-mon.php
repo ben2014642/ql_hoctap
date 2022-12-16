@@ -106,7 +106,7 @@ require_once(__DIR__ . '/header.php');
 
                         <div class="form-group">
                             <label for="end-date">Ngày kết thúc</label>
-                            <input type="date" class="form-control" id="end-date">
+                            <input type="date" required class="form-control" id="end-date">
                         </div>
 
 
@@ -441,8 +441,10 @@ require_once(__DIR__ . '/footer.php');
     function addAlert() {
         let ghichu_id = $("#ghichu_id").data('id');
         let endDate = $("#end-date").val();
-        // console.log(endDate);
-        // return;
+        if (endDate == '') {
+            alert("Vui lòng chọn ngày kết thúc !");
+            return;
+        }
         $.ajax({
             type: "POST",
             url: "<?= base_url('ajax/handleNote.php') ?>",
