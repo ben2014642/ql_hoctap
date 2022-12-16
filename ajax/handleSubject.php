@@ -3,8 +3,9 @@ session_start();
 require_once("../libs/helper.php");
 require_once("../libs/db.php");
 $db = new DB();
+$action = isset($_POST['action']) ? $_POST['action'] : 'getAllDataMon';
 if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
-    switch ($_POST['action']) {
+    switch ($action) {
         case 'updateMon':
             $idMon = $_POST['idMon'];
             $tenmon = $_POST['tenmon'];
@@ -37,8 +38,15 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
             $data = $db->getList($sql);
             die(json_encode($data));
             break;
+        case 'getAllDataMon':
+            $q = $_GET['q'];
+            $sql = "SELECT * FROM monhoc WHERE tenmon LIKE '%$q%'";
+            // die($sql);
+            $data = $db->getList($sql);
+            die(json_encode($data));
+            break;
         default:
             # code...
             break;
     }
-}
+} 

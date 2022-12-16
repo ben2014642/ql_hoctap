@@ -34,6 +34,7 @@ if (empty($_SESSION['account'])) {
     <link rel="stylesheet" href="<?= base_url('public/css/summernote-bs4.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('public/css/myStyle.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 </head>
 

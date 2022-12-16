@@ -14,6 +14,21 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
                 'status' => 'success'
             ]));
             break;
+        case 'addLH':
+            $user_id = $_POST['user_id'];
+            $tenmon = $_POST['tenmon'];
+            $phonghoc = $_POST['phonghoc'];
+            $tietbd = $_POST['tietbd'];
+            $sotiet = $_POST['sotiet'];
+            $thu = $_POST['thu'];
+
+            $sql = "INSERT INTO lichhoc VALUES(null,$user_id,'$tenmon','$phonghoc',$tietbd,$sotiet,$thu)";
+            // die($sql);
+            $db->handleSQL($sql);
+            die(json_encode([
+                'status' => 'success'
+            ]));
+            break;
         default:
             # code...
             break;
