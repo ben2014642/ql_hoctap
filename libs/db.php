@@ -72,10 +72,7 @@ class DB {
         return $data;
     }
 
-    public function handleDelete($table,$id)
-    {
-        
-    }
+
 }
 
 

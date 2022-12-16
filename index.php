@@ -1,4 +1,6 @@
 <?php
+session_start();
+$user_id = $_SESSION['account']['id'];
 require_once(__DIR__.'/libs/db.php');
 require_once(__DIR__.'/libs/helper.php');
 $view = isset($_GET['view']) ? $_GET['view'] : 'client';

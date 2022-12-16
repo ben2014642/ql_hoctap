@@ -5,6 +5,15 @@ $body = [
 $sql = "SELECT *
         FROM nhacnho nn JOIN ghichu gc ON nn.ghichu_id = gc.id";
 $getnn = $BB->getList($sql);
+
+$date_time_current = new DateTime();
+$w = (int)$date_time_current->format('w') + 2;
+
+
+$sql = "SELECT *
+        FROM lichhoc WHERE user_id = $user_id AND thu = $w";
+$lichhoc = $BB->getList($sql);
+
 require_once(__DIR__ . '/header.php');
 ?>
 <div class="content-wrapper">
@@ -98,7 +107,7 @@ require_once(__DIR__ . '/header.php');
             <div class="card-header">
               <h3 class="card-title">
                 <i class="fas fa-exclamation-triangle"></i>
-                Alerts
+                Deadline Tớiiiiiii
               </h3>
             </div>
             <!-- /.card-header -->
@@ -117,9 +126,9 @@ require_once(__DIR__ . '/header.php');
                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                       <h5><i class="icon fas fa-info"></i> Alert!</h5>
                       <p>' . $nn['noidung'] . '</p>
-                      <div class="row">
-                        <p>Đến hạn: <span id="denhan">' . $nn['end'] . '</span></p>
-
+                      <div class="row" style="justify-content: space-between;align-items: baseline;">
+                        <p style="color: red;">Đến hạn: <span id="denhan" style="color: blue;">' . $nn['end'] . '</span></p>
+                        <button style="height: 30px;" onclick="deleteNN(' . $nn['id_nn'] . ')" type="button" class="btn btn-danger btn-sm">Xóa</button>
                       </div>
                       
                     </div>
@@ -148,19 +157,26 @@ require_once(__DIR__ . '/header.php');
             <div class="card-header">
               <h3 class="card-title">
                 <i class="fas fa-bullhorn"></i>
-                Callouts
+                Lịch học
               </h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <div class="callout callout-danger">
-                <h5>I am a danger callout!</h5>
+              <?php
+                foreach ($lichhoc as $item) {
+                  echo '
+                  <div class="callout callout-danger">
+                    <div class="lichhoc" style="display:flex;">
+                      <h5>'.$item['tenmon'].'</h5>
+                      <span style="margin-left: 10px; color: blue">Ngày mai</span>
+                    </div>
+    
+                    <p>Phòng học: <span style="color: orange" class="phonghoc">'.$item['phonghoc'].'</span> Tiết bắt đầu: <span class="tiet_bd">'.$item['tiet_bd'].'</span></p>
+                  </div>';
+                }
+              ?>
 
-                <p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire
-                  soul,
-                  like these sweet mornings of spring which I enjoy with my whole heart.</p>
-              </div>
-              <div class="callout callout-info">
+              <!-- <div class="callout callout-info">
                 <h5>I am an info callout!</h5>
 
                 <p>Follow the steps to continue to payment.</p>
@@ -174,7 +190,7 @@ require_once(__DIR__ . '/header.php');
                 <h5>I am a success callout!</h5>
 
                 <p>This is a green callout.</p>
-              </div>
+              </div> -->
             </div>
             <!-- /.card-body -->
           </div>
@@ -201,5 +217,23 @@ require_once(__DIR__ . '/footer.php');
     ele.innerText = endDate;
   });
 
-  // console.log(endDate);
+  function deleteNN(id) {
+    $.ajax({
+      type: "POST",
+      url: "<?= base_url('ajax/handleNN.php') ?>",
+      data: {
+        action: 'delete',
+        id: id
+      },
+      dataType: "json",
+      success: function(res) {
+        if (res.status == 'success') {
+          toastr.success('Xóa thành công !', 'success')
+          setTimeout(() => {
+            location.reload();
+          }, 1500);
+        }
+      }
+    });
+  }
 </script>

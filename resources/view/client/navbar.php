@@ -189,9 +189,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./index2.html" class="nav-link">
+                            <a href="./index.php?action=taolichhoc" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard v2</p>
+                                <p>Tạo lịch học</p>
                             </a>
                         </li>
                         <li class="nav-item">
