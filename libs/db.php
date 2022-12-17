@@ -73,7 +73,13 @@ class DB {
         return $data;
     }
 
+    public function getCountRow($sql)
+    {
+        $result = mysqli_query($this->conn,$sql);
+        $data = mysqli_fetch_assoc($result);
 
+        return $data['total'];
+    }
 }
 
 

@@ -6,11 +6,11 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
+            <a href="#" class="nav-link">Liên hệ</a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
+        <!-- <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact</a>
-        </li>
+        </li> -->
     </ul>
 
     <!-- Right navbar links -->
@@ -141,7 +141,7 @@
     <!-- Brand Logo -->
     <a href="<?=base_url()?>" class="brand-link">
         <img src="<?=base_url('public/dist/img/AdminLTELogo.png')?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-light">Quản Lý Học Tập</span>
     </a>
 
     <!-- Sidebar -->
@@ -206,7 +206,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
@@ -807,7 +807,7 @@
                         <i class="nav-icon far fa-circle text-info"></i>
                         <p>Informational</p>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

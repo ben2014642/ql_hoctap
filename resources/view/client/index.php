@@ -14,6 +14,15 @@ $sql = "SELECT *
         FROM lichhoc WHERE user_id = $user_id AND thu = $w";
 $lichhoc = $BB->getList($sql);
 
+$sql = "SELECT count(*) as total FROM nhacnho";
+$soluong_nn = $BB->getCountRow($sql);
+$sql = "SELECT count(*) as total FROM lichhoc";
+$soluong_lh = $BB->getCountRow($sql);
+$sql = "SELECT count(*) as total FROM account";
+$soluong_user = $BB->getCountRow($sql);
+$sql = "SELECT count(*) as total FROM monhoc";
+$soluong_mh = $BB->getCountRow($sql);
+
 require_once(__DIR__ . '/header.php');
 ?>
 <div class="content-wrapper">
@@ -44,9 +53,9 @@ require_once(__DIR__ . '/header.php');
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>150</h3>
+              <h3><?=$soluong_lh?></h3>
 
-              <p>New Orders</p>
+              <p>Lịch học</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -59,9 +68,9 @@ require_once(__DIR__ . '/header.php');
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <h3><?=$soluong_mh?></h3>
 
-              <p>Bounce Rate</p>
+              <p>Môn học</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -74,9 +83,9 @@ require_once(__DIR__ . '/header.php');
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>44</h3>
+              <h3><?=$soluong_user?></h3>
 
-              <p>User Registrations</p>
+              <p>Thành viên</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -89,9 +98,9 @@ require_once(__DIR__ . '/header.php');
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>65</h3>
+              <h3><?=$soluong_nn?></h3>
 
-              <p>Unique Visitors</p>
+              <p>Nhắc nhở</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -124,7 +133,7 @@ require_once(__DIR__ . '/header.php');
                 echo '
                     <div class="alert alert-info alert-dismissible">
                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                      <h5><i class="icon fas fa-info"></i> Alert!</h5>
+                      <h5><i class="icon fas fa-info"></i> Thông báo mới</h5>
                       <p>' . $nn['noidung'] . '</p>
                       <div class="row" style="justify-content: space-between;align-items: baseline;">
                         <p style="color: red;">Đến hạn: <span id="denhan" style="color: blue;">' . $nn['end'] . '</span></p>

@@ -1,6 +1,6 @@
 <?php
 $body = [
-    'title' => 'Tạo lịch học'
+    'title' => 'Lịch Học'
 ];
 require_once(__DIR__ . '/header.php');
 $sql = "SELECT * FROM lichhoc";
@@ -11,26 +11,55 @@ $danhsach_lh = $BB->getList($sql);
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Môn: </h4>
+                <h4 class="modal-title">Chỉnh sửa lịch học </h4>
+                <input id="id_lh" type="text" value="" hidden>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div id="create-nhacnho">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="end-date">Ngày kết thúc</label>
-                            <input type="date" required class="form-control" id="end-date">
+                <div class="col-md-12">
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title mon-title">Môn: </h3>
                         </div>
-
-
-                    </div>
-
-                    <!-- /.card-body -->
-
-                    <div class="card-footer">
-                        <button type="submit" onclick="addAlert()" class="btn btn-primary btn-add-nhacnho">Thêm</button>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="monhoc">Môn học:</label>
+                                        <input type="text" required class="form-control" id="monhoc">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="phonghoc">Phòng học:</label>
+                                        <input type="text" required class="form-control" id="phonghoc">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="tiet_bd">Tiết bắt đầu:</label>
+                                        <input type="number" min="1" max="9" class="form-control" id="tiet_bd">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="sotiet">Số tiết:</label>
+                                        <input type="number" min="1" max="5" class="form-control" id="sotiet">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="thu">Thứ:</label>
+                                        <input type="number" min="2" max="8" class="form-control" id="thu">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
                     </div>
                 </div>
             </div>
@@ -53,7 +82,7 @@ $danhsach_lh = $BB->getList($sql);
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Blank Page</li>
+                        <li class="breadcrumb-item active"><?=$body['title']?></li>
                     </ol>
                 </div>
             </div>
@@ -75,25 +104,11 @@ $danhsach_lh = $BB->getList($sql);
         </div>
         <!-- Default box -->
         <div class="card">
-            <!-- <div class="card-header">
-                <h3 class="card-title">Các môn hiện tại
-                </h3>
-
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div> -->
             <div class="card-body">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Responsive Hover Table</h3>
+                            <!-- <div class="card-header">
 
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
@@ -106,7 +121,7 @@ $danhsach_lh = $BB->getList($sql);
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0 table-lichhoc">
                                 <table class="table table-hover text-nowrap">
@@ -134,10 +149,10 @@ $danhsach_lh = $BB->getList($sql);
                                                     <td>' . $lh['sotiet'] . '</td>
                                                     <td>' . $lh['thu'] . '</td>
                                                     <td>
-                                                    <button onclick="viewLH('.$lh['id_lh'].')" aria-label="" style="color:white;" class="btn btn-info btn-sm btn-icon-left m-b-10" type="button">
+                                                    <button data-toggle="modal" data-target="#modal-lichhoc"  onclick="viewLH(' . $lh['id_lh'] . ')" aria-label="" style="color:white;" class="btn btn-info btn-sm btn-icon-left m-b-10" type="button">
                                                         <i class="fas fa-edit mr-1"></i><span class="">Edit</span>
                                                     </button>
-                                                    <button onclick="deleteLH('.$lh['id_lh'].')" style="color:white;" class="btn btn-danger btn-sm btn-icon-left m-b-10" type="button">
+                                                    <button onclick="deleteLH(' . $lh['id_lh'] . ')" style="color:white;" class="btn btn-danger btn-sm btn-icon-left m-b-10" type="button">
                                                         <i class="fas fa-trash mr-1"></i><span class="">Delete</span>
                                                     </button>
 
@@ -156,7 +171,6 @@ $danhsach_lh = $BB->getList($sql);
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    Footer
                 </div>
                 <!-- /.card-footer-->
             </div>
@@ -171,18 +185,55 @@ $danhsach_lh = $BB->getList($sql);
 require_once(__DIR__ . '/footer.php');
 ?>
 <script>
-    function viewLH(id_lh) {
-        $.ajax({
+    async function viewLH(id_lh) {
+        let data = {
+            action: 'getLH',
+            id_lh: id_lh
+        }
+        let res = await handleAjaxLH(data);
+        res = res[0];
+
+        $("#id_lh").val(res.id_lh)
+        $(".mon-title").val(res.tenmon)
+        $("#monhoc").val(res.tenmon)
+        $("#phonghoc").val(res.phonghoc)
+        $("#tiet_bd").val(res.tiet_bd)
+        $("#sotiet").val(res.sotiet)
+        $("#thu").val(res.thu)
+
+    }
+
+    async function deleteLH(id_lh) {
+        var check = confirm("Bạn có chắc chắn muốn xóa ?");
+        if (!check) {
+            return;
+        }
+        let data = {
+            action: 'deleteLH',
+            id_lh: id_lh
+        }
+        let res = await handleAjaxLH(data);
+        if (res.status == 'success') {
+            toastr.success("Xóa thành công !", "success");
+            // reloadPage(1500);
+        }
+    }
+
+    function handleAjaxLH(data) {
+        var response;
+        return $.ajax({
             type: "POST",
-            url: "<?=base_url('ajax/handleNN.php')?>",
-            data: {
-                action: 'getLH',
-                id_lh: id_lh
-            },
+            url: "<?= base_url('ajax/handleNN.php') ?>",
+            data: data,
             dataType: "json",
-            success: function (response) {
-                
-            }
         });
+        // console.log(response);
+        // return response;
+    }
+
+    function reloadPage(timeout) {
+        setTimeout(() => {
+            location.reload();
+        }, timeout);
     }
 </script>

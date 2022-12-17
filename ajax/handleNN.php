@@ -24,7 +24,7 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
 
             $sql = "INSERT INTO lichhoc VALUES(null,$user_id,'$tenmon','$phonghoc',$tietbd,$sotiet,$thu)";
             // die($sql);
-            $db->handleSQL($sql);
+            // $db->handleSQL($sql);
             die(json_encode([
                 'status' => 'success'
             ]));
@@ -37,6 +37,14 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
             $sql = "SELECT * FROM lichhoc WHERE id_lh = $id_lh";
             $data = $db->getList($sql);
             die(json_encode($data));
+            break;
+        case 'deleteLH':
+            $id_lh = $_POST['id_lh'];
+            $sql = "DELETE FROM lichhoc WHERE id_lh = $id_lh";
+            $db->handleSQL($sql);
+            die(json_encode([
+                'status' => 'success'
+            ]));
             break;
         default:
             # code...

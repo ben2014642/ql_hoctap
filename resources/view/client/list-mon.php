@@ -28,13 +28,17 @@ $dachsach_mon = $BB->getList($sql);
                     </div>
                     <!-- /.card-body -->
 
-                    <div class="card-footer">
+                    <!-- <div class="card-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
                         <button class="btn btn-primary" onclick="updateMon()">Submit</button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" onclick="updateMon()">Submit</button>
+
             </div>
         </div>
         <!-- /.modal-content -->
@@ -82,12 +86,12 @@ $dachsach_mon = $BB->getList($sql);
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Môn Học</h1>
+                    <h1><?= $body['title'] ?></h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Blank Page</li>
+                        <li class="breadcrumb-item active"><?= $body['title'] ?></li>
                     </ol>
                 </div>
 
@@ -99,10 +103,12 @@ $dachsach_mon = $BB->getList($sql);
     <section class="content">
         <div class="row fl-direction-end mr-2">
             <div class="mb-3 ml-2">
-                <button  class="btn btn-primary btn-icon-left m-b-10" onclick="showAddMon()" type="button"><i class="fas fa-plus-circle mr-1"></i>Thêm</button>
+                <button class="btn btn-primary btn-icon-left m-b-10" onclick="showAddMon()" type="button"><i class="fas fa-plus-circle mr-1"></i>Thêm</button>
             </div>
             <div class="mb-3 ml-2">
-                <a class="btn btn-warning btn-icon-left m-b-10 btn-center " href="javascript:history.go(-1)" type="button"><ion-icon name="arrow-back-circle-outline"></ion-icon>Back</a>
+                <a class="btn btn-warning btn-icon-left m-b-10 btn-center " href="javascript:history.go(-1)" type="button">
+                    <ion-icon name="arrow-back-circle-outline"></ion-icon>Back
+                </a>
             </div>
 
         </div>

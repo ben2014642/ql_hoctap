@@ -18,7 +18,7 @@ $dachsach_mon = $BB->getList($sql);
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Blank Page</li>
+                        <li class="breadcrumb-item active"><?= $body['title'] ?></li>
                     </ol>
                 </div>
             </div>
@@ -63,42 +63,43 @@ $dachsach_mon = $BB->getList($sql);
                 </div>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="">Ngày học: </label>
-                        <select name="" class="custom-select rounded-0" id="select-thu">
-                            <option value="2">Thứ 2</option>
-                            <option value="3">Thứ 3</option>
-                            <option value="4">Thứ 4</option>
-                            <option value="5">Thứ 5</option>
-                            <option value="6">Thứ 6</option>
-                            <option value="7">Thứ 7</option>
-                        </select>
+                <form action="">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="">Ngày học: </label>
+                            <select name="" class="custom-select rounded-0" id="select-thu">
+                                <option selected value="2">Thứ 2</option>
+                                <option value="3">Thứ 3</option>
+                                <option value="4">Thứ 4</option>
+                                <option value="5">Thứ 5</option>
+                                <option value="6">Thứ 6</option>
+                                <option value="7">Thứ 7</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="">Phòng học</label>
+                            <input type="text" required class="form-control phong-hoc">
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label for="">Phòng học</label>
-                        <input type="text" class="form-control phong-hoc">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="">Tiết bắt đầu: </label>
+                            <input type="text" required class="form-control tiet-bd" placeholder="">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="">Số tiết</label>
+                            <input type="text" required class="form-control so-tiet" placeholder="">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="">Tiết bắt đầu: </label>
-                        <input type="text" class="form-control tiet-bd" placeholder="">
+                    <div class="row mt-3">
+                        <div class="col-sm-6">
+                            <button onclick="addLH()" class="btn btn-success btn-add-lh">Thêm</button>
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label for="">Số tiết</label>
-                        <input type="text" class="form-control so-tiet" placeholder="">
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-sm-6">
-                        <button onclick="addLH()" class="btn btn-success btn-add-lh">Thêm</button>
-                    </div>
-                </div>
             </div>
+            </form>
             <!-- /.card-body -->
             <div class="card-footer">
-                Footer
             </div>
             <!-- /.card-footer-->
         </div>
@@ -120,7 +121,6 @@ require_once(__DIR__ . '/footer.php');
         let tietbd = $(".tiet-bd").val();
         let sotiet = $(".so-tiet").val();
         let user_id = <?= $user_id ?>;
-        console.log(user_id);
         $.ajax({
             type: "POST",
             url: "<?= base_url('ajax/handleNN.php') ?>",
