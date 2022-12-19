@@ -44,10 +44,10 @@
 <!-- AdminLTE for demo purposes -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?=base_url('public/dist/js/pages/dashboard.js')?>"></script>
-<script src="<?=base_url('public/js/bb.js')?>"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="<?=base_url('public/js/moment.js')?>"></script>
 <script src="<?=base_url('public/js/countdown.js')?>"></script>
 <script src="<?=base_url('public/js/moment-countdown.js')?>"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="<?=base_url('public/js/bb.js')?>"></script>

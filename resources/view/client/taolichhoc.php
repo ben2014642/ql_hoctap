@@ -63,17 +63,18 @@ $dachsach_mon = $BB->getList($sql);
                 </div>
             </div>
             <div class="card-body">
-                <form action="">
+                <!-- <form action=""> -->
                     <div class="row">
                         <div class="col-sm-6">
                             <label for="">Ngày học: </label>
                             <select name="" class="custom-select rounded-0" id="select-thu">
-                                <option selected value="2">Thứ 2</option>
-                                <option value="3">Thứ 3</option>
-                                <option value="4">Thứ 4</option>
-                                <option value="5">Thứ 5</option>
-                                <option value="6">Thứ 6</option>
-                                <option value="7">Thứ 7</option>
+                                <option selected value="1">Thứ 2</option>
+                                <option value="2">Thứ 3</option>
+                                <option value="3">Thứ 4</option>
+                                <option value="4">Thứ 5</option>
+                                <option value="5">Thứ 6</option>
+                                <option value="6">Thứ 7</option>
+                                <option value="0">Chủ Nhật</option>
                             </select>
                         </div>
                         <div class="col-sm-6">
@@ -97,7 +98,7 @@ $dachsach_mon = $BB->getList($sql);
                         </div>
                     </div>
             </div>
-            </form>
+            <!-- </form> -->
             <!-- /.card-body -->
             <div class="card-footer">
             </div>
@@ -115,6 +116,7 @@ require_once(__DIR__ . '/footer.php');
 ?>
 <script>
     function addLH() {
+
         let tenmon = $("#chon-mon option:selected").text();
         let thu = $("#select-thu option:selected").val();
         let phonghoc = $(".phong-hoc").val();
@@ -138,10 +140,14 @@ require_once(__DIR__ . '/footer.php');
             success: function(res) {
                 if (res.status == 'success') {
                     toastr.success("Tạo lịch học thành công !", 'success');
-                    setTimeout(() => {
+                    
+                }
+                if (res.status == 'error') {
+                    showError(res.msg);
+                }
+                setTimeout(() => {
                         location.reload();
                     }, 1500);
-                }
             }
         });
     }

@@ -4,8 +4,6 @@ require_once("../libs/helper.php");
 require_once("../libs/db.php");
 // $BB = new DB();
 if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
-    // print_r($_FILES['files']);
-    // die();
     $files = $_FILES['files'];
     $fileArr = [];
     $target_dir = "../public/upload/img/";
@@ -30,33 +28,6 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
         'status' => 'success'
     ]));
 
-    // $allowtypes    = array('jpg', 'png', 'jpeg', 'gif');
-
-    // if (!in_array($imageFileType, $allowtypes)) {
-    //     $allowUpload = false;
-    //     die('Chỉ được upload các định dạng JPG, PNG, JPEG, GIF');
-    // }
-
-    // if ($allowUpload) {
-    //     // Xử lý di chuyển file tạm ra thư mục cần lưu trữ, dùng hàm move_uploaded_file
-    //     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-    //         $user_id = $_SESSION['account']['id'];
-    //         $tenanh = $nameImage;
-    //         $idmon = $_POST['idmon'];
-    //         $ghichu = $_POST['ghichu'];
-    //         $created_at = $updated_at = date('Y-m-d H:i:s');
-    //         $sql = "INSERT INTO gallery VALUES(null,$user_id,$idmon,'$tenanh','$ghichu','$created_at','$updated_at')";
-    //         // $BB->handleSQL($sql);
-    //         die(json_encode([
-    //             'status' => 'success',
-    //             'sql' => $sql
-    //         ]));
-    //     } else {
-    //         die(json_encode([
-    //             'status' => 'error'
-    //         ]));
-    //     }
-    // }
 }
 
 

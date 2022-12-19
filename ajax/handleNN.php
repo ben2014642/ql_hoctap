@@ -21,7 +21,12 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
             $tietbd = $_POST['tietbd'];
             $sotiet = $_POST['sotiet'];
             $thu = $_POST['thu'];
-
+            if ($db->checkExistsRow("SELECT * FROM lichhoc WHERE `tenmon` = '$tenmon'")) {
+                die(json_encode([
+                    'status' => 'error',
+                    'msg' => 'Môn này đẫ tồn tại trong hệ thống'
+                ]));
+            }
             $sql = "INSERT INTO lichhoc VALUES(null,$user_id,'$tenmon','$phonghoc',$tietbd,$sotiet,$thu)";
             // die($sql);
             // $db->handleSQL($sql);

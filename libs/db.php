@@ -80,6 +80,16 @@ class DB {
 
         return $data['total'];
     }
+
+    public function checkExistsRow($sql)
+    {
+        $query = mysqli_query($this->conn,$sql);
+        if (mysqli_num_rows($query) > 0) {
+            return true;
+        }
+
+        return false;
+    }
 }
 
 

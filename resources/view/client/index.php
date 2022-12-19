@@ -2,16 +2,16 @@
 $body = [
   'title' => 'Trang chủ'
 ];
+$today = date("Y-m-d");
 $sql = "SELECT *
-        FROM nhacnho nn JOIN ghichu gc ON nn.ghichu_id = gc.id ORDER BY id_nn DESC";
+        FROM nhacnho nn JOIN ghichu gc ON nn.ghichu_id = gc.id WHERE $today <= nn.end ORDER BY id_nn DESC";
 $getnn = $BB->getList($sql);
 
 $date_time_current = new DateTime();
-$w = (int)$date_time_current->format('w') + 2;
-
+$w = (int)$date_time_current->format('w');
 
 $sql = "SELECT *
-        FROM lichhoc WHERE user_id = $user_id AND thu = $w";
+        FROM lichhoc WHERE user_id = $user_id";
 $lichhoc = $BB->getList($sql);
 
 $sql = "SELECT count(*) as total FROM nhacnho";
@@ -53,7 +53,7 @@ require_once(__DIR__ . '/header.php');
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3><?=$soluong_lh?></h3>
+              <h3><?= $soluong_lh ?></h3>
 
               <p>Lịch học</p>
             </div>
@@ -68,7 +68,7 @@ require_once(__DIR__ . '/header.php');
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3><?=$soluong_mh?></h3>
+              <h3><?= $soluong_mh ?></h3>
 
               <p>Môn học</p>
             </div>
@@ -83,7 +83,7 @@ require_once(__DIR__ . '/header.php');
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3><?=$soluong_user?></h3>
+              <h3><?= $soluong_user ?></h3>
 
               <p>Thành viên</p>
             </div>
@@ -98,7 +98,7 @@ require_once(__DIR__ . '/header.php');
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3><?=$soluong_nn?></h3>
+              <h3><?= $soluong_nn ?></h3>
 
               <p>Nhắc nhở</p>
             </div>
@@ -107,6 +107,7 @@ require_once(__DIR__ . '/header.php');
             </div>
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
+
         </div>
         <!-- ./col -->
       </div>
@@ -144,16 +145,6 @@ require_once(__DIR__ . '/header.php');
                     ';
               }
               ?>
-              <!-- <div class="alert alert-warning alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                  <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
-                  Warning alert preview. This alert is dismissable.
-                </div>
-                <div class="alert alert-success alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                  <h5><i class="icon fas fa-check"></i> Alert!</h5>
-                  Success alert preview. This alert is dismissable.
-                </div> -->
             </div>
             <!-- /.card-body -->
           </div>
@@ -170,43 +161,86 @@ require_once(__DIR__ . '/header.php');
               </h3>
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
-              <?php
-              $arrColor = ['callout callout-danger', 'callout callout-info', 'callout callout-warning', 'callout callout-success'];
-              $i = 0;
-              foreach ($lichhoc as $item) {
-                echo '
-                  <div class="' . $arrColor[$i] . '">
-                    <div class="lichhoc" style="display:flex;">
-                      <h5>' . $item['tenmon'] . '</h5>
-                      <span style="margin-left: 10px; color: blue">Ngày mai</span>
-                    </div>
-    
-                    <p>Phòng học: <span style="color: orange" class="phonghoc">' . $item['phonghoc'] . '</span> Tiết bắt đầu: <span class="tiet_bd">' . $item['tiet_bd'] . '</span></p>
-                  </div>';
-                $i++;
-                if ($i == 4) {
-                  $i = 0;
-                }
-              }
-
-              ?>
-
-              <!-- <div class="callout callout-info">
-                <h5>I am an info callout!</h5>
-
-                <p>Follow the steps to continue to payment.</p>
+            <div class="card card-primary card-outline card-outline-tabs">
+              <div class="card-header p-0 border-bottom-0">
+                <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Hôm Nay</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">Ngày Mai</a>
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill" href="#custom-tabs-four-messages" role="tab" aria-controls="custom-tabs-four-messages" aria-selected="false">Messages</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-settings-tab" data-toggle="pill" href="#custom-tabs-four-settings" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="false">Settings</a>
+                  </li> -->
+                </ul>
               </div>
-              <div class="callout callout-warning">
-                <h5>I am a warning callout!</h5>
+              <div class="card-body">
+                <div class="tab-content" id="custom-tabs-four-tabContent">
+                  <div class="tab-pane fade active show" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                    <?php
+                    $arrColor = ['callout callout-danger', 'callout callout-info', 'callout callout-warning', 'callout callout-success'];
+                    $i = 0;
+                    if (is_array($lichhoc) && count($lichhoc) >= 1) {
+                      foreach ($lichhoc as $item) {
+                        if ($item['thu'] == $w) {
+                          echo '
+                      <div class="' . $arrColor[$i] . '">
+                        <div class="lichhoc" style="display:flex;">
+                          <h5>' . $item['tenmon'] . '</h5>
+                          <span style="margin-left: 10px; color: blue">Hôm nay</span>
+                        </div>
+        
+                        <p>Phòng học: <span style="color: orange" class="phonghoc">' . $item['phonghoc'] . '</span> Tiết bắt đầu: <span class="tiet_bd">' . $item['tiet_bd'] . '</span></p>
+                      </div>';
+                          $i++;
+                          if ($i == 4) {
+                            $i = 0;
+                          }
+                        }
+                      }
+                    } else {
+                      echo '<h4>Hiện tại không có dữ liệu</h4>';
+                    }
 
-                <p>This is a yellow callout.</p>
+                    ?>
+                  </div>
+                  <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+                    <?php
+                    $arrColor = ['callout callout-danger', 'callout callout-info', 'callout callout-warning', 'callout callout-success'];
+                    $i = 0;
+                    if (is_array($lichhoc) && count($lichhoc) >= 1) {
+                      foreach ($lichhoc as $item) {
+                        // echo $w." ".$item['thu']."\n";
+                        if ($w == ($item['thu'] - 1)) {
+                          echo '
+                      <div class="' . $arrColor[$i] . '">
+                        <div class="lichhoc" style="display:flex;">
+                          <h5>' . $item['tenmon'] . '</h5>
+                          <span style="margin-left: 10px; color: blue">Ngày mai</span>
+                        </div>
+        
+                        <p>Phòng học: <span style="color: orange" class="phonghoc">' . $item['phonghoc'] . '</span> Tiết bắt đầu: <span class="tiet_bd">' . $item['tiet_bd'] . '</span></p>
+                      </div>';
+                          $i++;
+                          if ($i == 4) {
+                            $i = 0;
+                          }
+                        }
+                      }
+                    } else {
+                      echo '<h4>Hiện tại không có dữ liệu</h4>';
+                    }
+
+                    ?>
+                  </div>
+
+                </div>
               </div>
-              <div class="callout callout-success">
-                <h5>I am a success callout!</h5>
-
-                <p>This is a green callout.</p>
-              </div> -->
+              <!-- /.card -->
             </div>
             <!-- /.card-body -->
           </div>
@@ -245,10 +279,15 @@ require_once(__DIR__ . '/footer.php');
       success: function(res) {
         if (res.status == 'success') {
           toastr.success('Xóa thành công !', 'success')
-          setTimeout(() => {
+
+        }
+        if (res.status == 'error') {
+          toastr.error(res.msg, 'error');
+
+        }
+        setTimeout(() => {
             location.reload();
           }, 1500);
-        }
       }
     });
   }
