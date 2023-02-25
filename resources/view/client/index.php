@@ -4,12 +4,12 @@ $body = [
 ];
 $today = date("Y-m-d");
 $sql = "SELECT *
-        FROM nhacnho nn JOIN ghichu gc ON nn.ghichu_id = gc.id WHERE $today <= nn.end ORDER BY id_nn DESC";
+        FROM nhacnho nn JOIN ghichu gc ON nn.ghichu_id = gc.id WHERE '$today' <= nn.end ORDER BY id_nn DESC";
 $getnn = $BB->getList($sql);
 
 $date_time_current = new DateTime();
 $w = (int)$date_time_current->format('w');
-
+// $user_id = 1;
 $sql = "SELECT *
         FROM lichhoc WHERE user_id = $user_id";
 $lichhoc = $BB->getList($sql);

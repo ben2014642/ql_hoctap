@@ -44,7 +44,7 @@ require_once(__DIR__ . '/header.php');
                     <div class="card-body">
                         <div class="form-group">
                             <label for="note-img">Ghi chú</label>
-                            <input type="text" class="form-control" id="note-img" placeholder="Enter email">
+                            <input type="text" class="form-control" id="note-img" placeholder="Nhập nội dung">
                             <input type="text" hidden value="<?= $_GET['id'] ?>" class="form-control" id="idmon">
                         </div>
                         <div class="form-group">
@@ -73,7 +73,15 @@ require_once(__DIR__ . '/header.php');
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button onclick="submitImage()" class="submit-img-gallery btn btn-primary">Submit</button>
+                        <button onclick="submitImage()" class="submit-img-gallery btn btn-primary">
+                            <div class="wrap-submit">
+                                <span>Submit</span>
+                            </div>
+                            <div class="wrap-loading">
+                                <i class="fa fa-spinner fa-spin icon-loading"></i><span>Loading</span>
+                            </div>
+                        </button>
+
                     </div>
                 </div>
             </div>
@@ -122,10 +130,10 @@ require_once(__DIR__ . '/footer.php');
         var form_data = new FormData();
         var file_arr = Object.entries(file_data);
         file_arr.forEach(file => {
-            console.log(file[1]);
-            form_data.append("files[]",file[1]);
+            // console.log(file[1]);
+            form_data.append("files[]", file[1]);
         });
-        console.log(form_data);
+        // console.log(form_data); 
         form_data.append('idmon', $("#idmon").val());
         form_data.append('ghichu', $("#note-img").val());
         $.ajax({
@@ -136,6 +144,12 @@ require_once(__DIR__ . '/footer.php');
             processData: false,
             data: form_data,
             type: 'post',
+            beforeSend: function() {
+                console.log('12312312');
+                document.querySelector(".wrap-loading").style.display = 'block';
+                document.querySelector(".wrap-loading").style.cursor = 'not-allowed';
+                document.querySelector(".wrap-submit").style.display = 'none';
+            },
             success: function(res) {
                 console.log(res);
                 if (res.status == 'success') {

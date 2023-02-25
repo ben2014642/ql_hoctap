@@ -17,7 +17,7 @@ $dachsach_mon = $BB->getList($sql);
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
                         <li class="breadcrumb-item active"><?= $body['title'] ?></li>
                     </ol>
                 </div>
@@ -29,7 +29,7 @@ $dachsach_mon = $BB->getList($sql);
     <section class="content">
         <div class="row fl-direction-end mr-2">
             <div class="mb-3 ml-2">
-                <a href="?action=lichhoc" class="btn btn-primary btn-icon-left m-b-10"><i class="fa-solid fa-list"></i>Danh Sách</a href="">
+                <a href="/home/lichhoc" class="btn btn-primary btn-icon-left m-b-10"><i class="fa-solid fa-list"></i>Danh Sách</a href="">
             </div>
             <div class="mb-3 ml-2">
                 <a class="btn btn-warning btn-icon-left m-b-10 btn-center " href="javascript:history.go(-1)" type="button">

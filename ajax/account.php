@@ -13,7 +13,7 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
                 'id' => $account['id'],
                 'username' => $account['username']
             ];
-
+            
             die(json_encode(['status' => 'success']));
         } else {
             die(json_encode(['status' => 'error']));

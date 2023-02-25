@@ -16,12 +16,12 @@ $listImg = $BB->getList($sql);
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1><?=$body['title']?></h1>
+                    <h1><?= $body['title'] ?></h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active"><?=$body['title']?></li>
+                        <li class="breadcrumb-item active"><?= $body['title'] ?></li>
                     </ol>
                 </div>
             </div>
@@ -30,16 +30,24 @@ $listImg = $BB->getList($sql);
 
     <!-- Main content -->
     <section class="content">
+        <div class="row fl-direction-end mr-2">
+            <div class="mb-3 ml-2">
+                <button class="btn btn-primary">
+                    <a style="color: white" href="/home/upload/<?= $idmon ?>">UPLOAD</a>
+                </button>
+            </div>
+            <div class="mb-3 ml-2">
+                <a class="btn btn-warning btn-icon-left m-b-10 btn-center " href="javascript:history.go(-1)" type="button">
+                    <ion-icon name="arrow-back-circle-outline"></ion-icon>Back
+                </a>
+            </div>
 
+        </div>
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    Thư viện ảnh đã thêm 
-                    <button class="btn btn-primary">
-                        <a style="color: white" href="?action=upload&id=<?=$idmon?>">UPLOAD</a>
-                    </button>
-                    <a href="javascript:history.go(-1)" class="btn btn-success myBtn">Back</a>
+                    Thư viện ảnh đã thêm
                 </h3>
 
                 <div class="card-tools">
@@ -71,17 +79,17 @@ $listImg = $BB->getList($sql);
                 </div> -->
                 <div class="portfolio-item row">
                     <?php
-                        foreach ($listImg as $item ) {
-                            echo '
+                    foreach ($listImg as $item) {
+                        echo '
                             <div class="item selfie col-lg-3 col-md-4 col-6 col-sm">
                                 <a href="https://image.freepik.com/free-photo/stylish-young-woman-with-bags-taking-selfie_23-2147962203.jpg" class="fancylight popup-btn" data-fancybox-group="light">
-                                    <img class="img-fluid" src="'.base_url('public/upload/img/').$item['tenanh'].'" alt="">
+                                    <img class="img-fluid" src="' . $item['tenanh'] . '" alt="">
                                 </a>
                             </div>
                             ';
-                        }
+                    }
                     ?>
-                    
+
                 </div>
             </div>
             <!-- /.card-body -->

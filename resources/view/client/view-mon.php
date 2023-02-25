@@ -143,7 +143,7 @@ require_once(__DIR__ . '/header.php');
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
                         <li class="breadcrumb-item active"><?=$body['title']?></li>
                     </ol>
                 </div>
@@ -157,7 +157,7 @@ require_once(__DIR__ . '/header.php');
             <!-- <button type="button" class="ml-2 btn btn-primary btn-center" data-toggle="modal" data-target="#modal-default">
                 <ion-icon name="add-circle-outline"></ion-icon>Thêm
             </button> -->
-            <a href="?action=gallery&id=<?= $idmon ?>">
+            <a href="/home/gallery/<?= $idmon ?>">
                 <button type="button" class="ml-2 btn btn-warning btn-center">
                     <ion-icon name="images-outline"></ion-icon>Gallery
                 </button>
@@ -209,7 +209,7 @@ require_once(__DIR__ . '/header.php');
                                 $sql = "SELECT * FROM gallery gl JOIN ghichu gc ON gl.ghichu_id = gc.id WHERE gc.id= $ghichu_id LIMIT 2";
                                 $getImg = $BB->getList($sql);
                                 foreach ($getImg as $img) {
-                                    $strImg .= '<img style="width: 108px" src="public/upload/img/' . $img['tenanh'] . '">';
+                                    $strImg .= '<img style="width: 108px" src="'.$img['tenanh'] . '">';
                                 }
                                 echo '
                                         <input id="ghichu_id" type="text" data-id="' . $item['id'] . '" hidden>
@@ -322,11 +322,16 @@ require_once(__DIR__ . '/footer.php');
         $.ajax({
             url: '<?= base_url('ajax/upload.php') ?>',
             dataType: 'json',
-            cache: false,
-            contentType: false,
-            processData: false,
+            // cache: false,
+            // contentType: false,
+            // processData: false,
+            // async: false,
             data: form_data,
             type: 'post',
+            beforeSend: function () {
+                console.log('123123');
+                $(".wrap-loading").show();            
+            },
             success: function(res) {
                 console.log(res);
                 if (res.status == 'success') {
@@ -436,7 +441,7 @@ require_once(__DIR__ . '/footer.php');
         let result = '';
         arrImg.forEach(img => {
             result += `
-            <img style="width: 108px" src="public/upload/img/${img.tenanh}">
+            <img style="width: 108px" src="${img.tenanh}">
             `
         });
 

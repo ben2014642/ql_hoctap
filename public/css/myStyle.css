@@ -189,3 +189,9 @@
         font-size: 12px;
     }
 } */
+.loading i {
+    display: block;
+}
+.wrap-loading {
+    display: none;
+}

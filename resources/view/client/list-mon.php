@@ -145,11 +145,11 @@ $dachsach_mon = $BB->getList($sql);
                             echo '
                                     <tr>
                                         <td>' . $mon['id'] . '</td>
-                                        <td><a href="?action=view-mon&id=' . $mon['id'] . '">' . $mon['tenmon'] . '</td>
+                                        <td><a href="/home/view-mon/' . $mon['id'] . '">' . $mon['tenmon'] . '</td>
                                         <td>
                                             <ion-icon name="create-outline" class="btnAction" onclick="showMon(' . $mon['id'] . ')"></ion-icon>
                                             <ion-icon name="trash-outline" class="btnAction" onclick="deleteMon(' . $mon['id'] . ')"></ion-icon>
-                                            <a href="?action=view-mon&id=' . $mon['id'] . '">
+                                            <a href="/home/view-mon/' . $mon['id'] . '">
                                                 <ion-icon name="eye-outline" class="btnAction"></ion-icon>
                                             </a>
                                             

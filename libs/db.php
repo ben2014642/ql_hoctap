@@ -3,7 +3,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 class DB {
     protected $conn;
-    protected $db = 'hoctap';
+    protected $db = 'aaa';
     protected $user = 'root';
     protected $pass = '';
 

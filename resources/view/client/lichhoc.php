@@ -3,7 +3,8 @@ $body = [
     'title' => 'Lịch Học'
 ];
 require_once(__DIR__ . '/header.php');
-$sql = "SELECT * FROM lichhoc";
+$sql = "SELECT * FROM lichhoc WHERE user_id = $user_id";
+echo $sql;
 $danhsach_lh = $BB->getList($sql);
 
 ?>
