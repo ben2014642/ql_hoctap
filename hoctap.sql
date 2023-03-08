@@ -117,10 +117,6 @@ CREATE TABLE IF NOT EXISTS `nhacnho` (
   CONSTRAINT `nhacnho_fk1` FOREIGN KEY (`ghichu_id`) REFERENCES `ghichu` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
--- Dumping data for table hoctap.nhacnho: ~2 rows (approximately)
-INSERT INTO `nhacnho` (`id_nn`, `ghichu_id`, `start`, `end`) VALUES
-	(9, 21, '2022-12-17', '2022-12-18'),
-	(10, 46, '2022-12-19', '2022-12-21');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
